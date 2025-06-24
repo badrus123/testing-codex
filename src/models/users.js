@@ -1,27 +1,27 @@
 module.exports = function (sequelize, DataTypes) {
-  const Articles = sequelize.define(
-    'articles',
+  const Users = sequelize.define(
+    'users',
     {
       id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
       },
-      title: {
+      name: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      content: {
-        type: DataTypes.TEXT,
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+      },
+      password: {
+        type: DataTypes.STRING,
         allowNull: false,
       },
-      userId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'users',
-          key: 'id',
-        },
+      address: {
+        type: DataTypes.STRING,
       },
       createdAt: {
         type: DataTypes.DATE,
@@ -33,10 +33,10 @@ module.exports = function (sequelize, DataTypes) {
       },
     },
     {
-      tableName: 'articles',
+      tableName: 'users',
       timestamps: true,
     },
   )
 
-  return Articles
+  return Users
 }

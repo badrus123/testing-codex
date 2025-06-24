@@ -18,8 +18,12 @@ class ArticlesController {
   }
 
   create(req, res) {
+    if (!req.user) {
+      return res.status(401).json({ message: 'Unauthorized' })
+    }
+    const data = { ...req.body, userId: req.user.id }
     articlesService
-      .create(req.body)
+      .create(data)
       .then((article) => {
         res.status(201).json(article)
       })
